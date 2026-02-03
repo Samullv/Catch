@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqij6dlj81plt"]
+
+[ext_resource type="Script" uid="uid://ct2noxi54w2a1" path="res://Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="Texture2D" uid="uid://c3j0v1td7f2xl" path="res://icon.svg" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cm1jqphv0vwom" path="res://Scenes/person.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://c4j0vi4xm0hj8" path="res://Scenes/fruta.tscn" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://b2mbdqjqstqxw" path="res://Scenes/bomb.tscn" id="3_21xkr"]
+[ext_resource type="Script" uid="uid://bp800krscr8dj" path="res://Scripts/ui.gd" id="5_kry3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
+size = Vector2(808, 112)
+
+[node name="main" type="Node2D"]
+position = Vector2(8, 3)
+script = ExtResource("1_8gbba")
+fruit_scene = ExtResource("2_jjvhh")
+bomb_scene = ExtResource("3_21xkr")
+
+[node name="map" type="StaticBody2D" parent="."]
+position = Vector2(418, 664)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map"]
+position = Vector2(-13, -118)
+shape = SubResource("RectangleShape2D_kry3j")
+
+[node name="Sprite2D" type="Sprite2D" parent="map"]
+position = Vector2(-15.5, -109)
+scale = Vector2(6.49219, 1)
+texture = ExtResource("2_8gbba")
+
+[node name="person" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(400, 445)
+
+[node name="Fruittimer" type="Timer" parent="."]
+
+[node name="Starttime" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="Interface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_kry3j")
+
+[node name="Score" type="Label" parent="Interface/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_right = 35.0
+offset_bottom = 23.0
+grow_horizontal = 2
+scale = Vector2(1.81871, 1.96425)
+text = "Score: 00"
+
+[node name="Bombtimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Fruittimer" to="." method="_on_fruittimer_timeout"]
+[connection signal="timeout" from="Starttime" to="." method="_on_starttime_timeout"]
+[connection signal="timeout" from="Bombtimer" to="." method="_on_bombtimer_timeout"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4j0vi4xm0hj8"]
+
+[ext_resource type="Script" uid="uid://0015wbsj2ab7" path="res://fruta.gd" id="1_lv70x"]
+[ext_resource type="Texture2D" uid="uid://c3j0v1td7f2xl" path="res://icon.svg" id="1_tdt5t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdt5t"]
+radius = 20.025
+
+[node name="fruta" type="RigidBody2D"]
+z_index = 10
+gravity_scale = 0.5
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_lv70x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tdt5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4375, 0.375)
+texture = ExtResource("1_tdt5t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
