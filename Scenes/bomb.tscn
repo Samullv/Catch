@@ -1,23 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2mbdqjqstqxw"]
+[gd_scene load_steps=9 format=3 uid="uid://b2mbdqjqstqxw"]
 
 [ext_resource type="Script" uid="uid://xy5g3pt3ri6r" path="res://Scripts/bomb.gd" id="1_kdyat"]
-[ext_resource type="Texture2D" uid="uid://c3j0v1td7f2xl" path="res://icon.svg" id="1_yx723"]
+[ext_resource type="Texture2D" uid="uid://ys2lspiq1ct6" path="res://Sprites/pixilart-1770146031980.png" id="2_kdyat"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdyat"]
 radius = 25.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fiif"]
+atlas = ExtResource("2_kdyat")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60xmw"]
+atlas = ExtResource("2_kdyat")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8kb1"]
+atlas = ExtResource("2_kdyat")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkuqu"]
+atlas = ExtResource("2_kdyat")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gy8dh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fiif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60xmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8kb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkuqu")
+}],
+"loop": true,
+"name": &"bomb",
+"speed": 4.0
+}]
+
 [node name="bomb" type="RigidBody2D"]
+visibility_layer = 2
+scale = Vector2(1.03947, 1.23171)
+gravity_scale = 0.7
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_kdyat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.740198)
 shape = SubResource("CircleShape2D_kdyat")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.976471, 0, 0, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.453125, 0.453125)
-texture = ExtResource("1_yx723")
+scale = Vector2(3.078, 2.299)
+sprite_frames = SubResource("SpriteFrames_gy8dh")
+animation = &"bomb"
+autoplay = "bomb"
+frame_progress = 0.913458
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

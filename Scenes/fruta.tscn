@@ -1,12 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4j0vi4xm0hj8"]
+[gd_scene load_steps=9 format=3 uid="uid://c4j0vi4xm0hj8"]
 
 [ext_resource type="Script" uid="uid://0015wbsj2ab7" path="res://fruta.gd" id="1_lv70x"]
-[ext_resource type="Texture2D" uid="uid://c3j0v1td7f2xl" path="res://icon.svg" id="1_tdt5t"]
+[ext_resource type="Texture2D" uid="uid://b5gsmx781xpr2" path="res://Sprites/Fruit+.png" id="2_lv70x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdt5t"]
-radius = 20.025
+radius = 20.3008
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wos1q"]
+atlas = ExtResource("2_lv70x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi553"]
+atlas = ExtResource("2_lv70x")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6k4l"]
+atlas = ExtResource("2_lv70x")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka4fi"]
+atlas = ExtResource("2_lv70x")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6wbfy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wos1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi553")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6k4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ka4fi")
+}],
+"loop": true,
+"name": &"fruta",
+"speed": 4.0
+}]
 
 [node name="fruta" type="RigidBody2D"]
+visibility_layer = 2
 z_index = 10
 gravity_scale = 0.5
 can_sleep = false
@@ -15,10 +52,18 @@ max_contacts_reported = 1
 script = ExtResource("1_lv70x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.13622, 1.30122)
 shape = SubResource("CircleShape2D_tdt5t")
+one_way_collision_margin = 0.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4375, 0.375)
-texture = ExtResource("1_tdt5t")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 3
+texture_filter = 1
+scale = Vector2(3.11427, 2.67452)
+sprite_frames = SubResource("SpriteFrames_6wbfy")
+animation = &"fruta"
+autoplay = "fruta"
+frame = 2
+frame_progress = 0.643453
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

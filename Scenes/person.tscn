@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://cm1jqphv0vwom"]
 
 [ext_resource type="Script" uid="uid://cumyop046vadq" path="res://person.gd" id="1_10xcd"]
-[ext_resource type="Texture2D" uid="uid://c3j0v1td7f2xl" path="res://icon.svg" id="2_74dau"]
+[ext_resource type="Texture2D" uid="uid://cwjrjvs7ivhu8" path="res://Sprites/IdleF.png" id="2_74dau"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74dau"]
-size = Vector2(92, 71.5)
+size = Vector2(92, 180)
 
 [node name="person" type="CharacterBody2D"]
 script = ExtResource("1_10xcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.25)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_74dau")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.789062, 0.625)
+texture_filter = 1
+scale = Vector2(0.484531, 0.4465)
 texture = ExtResource("2_74dau")

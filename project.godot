@@ -28,3 +28,8 @@ window/size/viewport_height=600
 
 3d_physics/size/viewport_height=648
 3d_physics/size/viewport_width=1152
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
