@@ -1,0 +1,204 @@
+[gd_scene load_steps=19 format=3 uid="uid://b5j0vvgqew1rf"]
+
+[ext_resource type="Script" uid="uid://rmikon43633a" path="res://Scripts/menu.gd" id="1_1rerr"]
+[ext_resource type="Texture2D" uid="uid://dh86gln0hi054" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_2.png" id="4_rfqti"]
+[ext_resource type="Texture2D" uid="uid://cnjcglg5hoek2" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_3.png" id="5_g8i7c"]
+[ext_resource type="Texture2D" uid="uid://xemcmpml6ys2" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_1.png" id="6_23t3j"]
+[ext_resource type="Texture2D" uid="uid://xw3k6jgcbdb6" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_2.png" id="7_8ph6h"]
+[ext_resource type="Texture2D" uid="uid://b1nt263tdd8uv" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_3.png" id="8_5ti5v"]
+[ext_resource type="Script" uid="uid://dup4cdjfl376d" path="res://Scripts/layer_1.gd" id="8_rfqti"]
+[ext_resource type="Texture2D" uid="uid://baw38dlqdef5d" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_1.png" id="9_7qvly"]
+[ext_resource type="Texture2D" uid="uid://cyaghpgamige7" path="res://Sprites/1.png" id="9_rfqti"]
+[ext_resource type="Texture2D" uid="uid://c41rwq6pgf5ia" path="res://Sprites/summer 1/3.png" id="10_g8i7c"]
+[ext_resource type="Texture2D" uid="uid://doftp7asxexfu" path="res://Sprites/summer 1/4.png" id="11_8ph6h"]
+[ext_resource type="FontFile" uid="uid://ceooj8s6ssns1" path="res://font/Daydream DEMO.otf" id="12_g8i7c"]
+
+[sub_resource type="Animation" id="Animation_rfqti"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7qvly"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8i7c"]
+_data = {
+&"RESET": SubResource("Animation_rfqti"),
+&"fade_out": SubResource("Animation_7qvly")
+}
+
+[sub_resource type="Animation" id="Animation_23t3j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g8i7c"]
+resource_name = "title"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.03333, 1.53333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1), Vector2(0.99, 0.99), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ph6h"]
+_data = {
+&"RESET": SubResource("Animation_23t3j"),
+&"title": SubResource("Animation_g8i7c")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_1rerr")
+metadata/_edit_vertical_guides_ = [-145.0]
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g8i7c")
+}
+speed_scale = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 576.0
+offset_bottom = 325.0
+rotation = -0.00789065
+scale = Vector2(2.57881, 2.14044)
+color = Color(0, 0, 0, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 575.0
+offset_bottom = 325.0
+size_flags_horizontal = 4
+
+[node name="start" type="TextureButton" parent="Control"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = -21.0
+offset_right = -39.0
+offset_bottom = 43.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("4_rfqti")
+texture_pressed = ExtResource("5_g8i7c")
+texture_hover = ExtResource("6_23t3j")
+
+[node name="quit" type="TextureButton" parent="Control"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = 83.0
+offset_right = -39.0
+offset_bottom = 147.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.00732312
+texture_normal = ExtResource("7_8ph6h")
+texture_pressed = ExtResource("8_5ti5v")
+texture_hover = ExtResource("9_7qvly")
+
+[node name="BG" type="ParallaxBackground" parent="."]
+
+[node name="layer1" type="ParallaxLayer" parent="BG"]
+auto_translate_mode = 1
+motion_mirroring = Vector2(800, 0)
+script = ExtResource("8_rfqti")
+
+[node name="sprite1" type="Sprite2D" parent="BG/layer1"]
+texture_filter = 1
+position = Vector2(304, 224)
+scale = Vector2(1.89898, 2.20478)
+texture = ExtResource("9_rfqti")
+
+[node name="layer2" type="ParallaxLayer" parent="BG"]
+
+[node name="sprite2" type="Sprite2D" parent="BG/layer2"]
+texture_filter = 1
+position = Vector2(408, 296)
+scale = Vector2(1.43698, 1.68521)
+texture = ExtResource("10_g8i7c")
+
+[node name="layer3" type="ParallaxLayer" parent="BG"]
+position = Vector2(-8, 8)
+
+[node name="sprite3" type="Sprite2D" parent="BG/layer3"]
+texture_filter = 1
+position = Vector2(425, 320)
+scale = Vector2(1.45147, 1.84544)
+texture = ExtResource("11_8ph6h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 104.0
+offset_top = 192.0
+offset_right = 704.0
+offset_bottom = 274.0
+rotation = -0.0812624
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 22
+theme_override_fonts/font = ExtResource("12_g8i7c")
+theme_override_font_sizes/font_size = 50
+text = "APPLE BOUNTY"
+
+[node name="title" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8ph6h")
+}
+
+[connection signal="pressed" from="Control/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/quit" to="." method="_on_quit_pressed"]

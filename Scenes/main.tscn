@@ -1,20 +1,72 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqij6dlj81plt"]
+[gd_scene load_steps=18 format=3 uid="uid://bqij6dlj81plt"]
 
 [ext_resource type="Script" uid="uid://ct2noxi54w2a1" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cm1jqphv0vwom" path="res://Scenes/person.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://c4j0vi4xm0hj8" path="res://Scenes/fruta.tscn" id="2_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://b2mbdqjqstqxw" path="res://Scenes/bomb.tscn" id="3_21xkr"]
+[ext_resource type="Texture2D" uid="uid://sim20vek6yiu" path="res://Sprites/5.png" id="4_6iyac"]
 [ext_resource type="Texture2D" uid="uid://tlwl5lykhg4h" path="res://Sprites/2.png" id="4_21xkr"]
-[ext_resource type="Texture2D" uid="uid://cq1susr7uyy6h" path="res://Sprites/images-removebg-preview.png" id="4_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://dt6hfqfy8pupf" path="res://Sprites/4.png" id="4_ynf5e"]
 [ext_resource type="Script" uid="uid://bp800krscr8dj" path="res://Scripts/ui.gd" id="5_kry3j"]
 [ext_resource type="Script" uid="uid://dup4cdjfl376d" path="res://Scripts/layer_1.gd" id="6_hptm8"]
-[ext_resource type="Texture2D" uid="uid://cyaghpgamige7" path="res://Sprites/1.png" id="7_hptm8"]
+[ext_resource type="Texture2D" uid="uid://b8rhmjy5it7dk" path="res://Sprites/10.png" id="8_6iyac"]
 [ext_resource type="Texture2D" uid="uid://rpp2gu1xa72a" path="res://Sprites/3.png" id="9_d1ilt"]
 [ext_resource type="FontFile" uid="uid://ceooj8s6ssns1" path="res://font/Daydream DEMO.otf" id="12_6iyac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
 size = Vector2(808, 112)
+
+[sub_resource type="Animation" id="Animation_fdnlq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jkdf5"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6iyac"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wsu2k"]
+_data = {
+&"RESET": SubResource("Animation_fdnlq"),
+&"fade_in": SubResource("Animation_jkdf5"),
+&"fade_out": SubResource("Animation_6iyac")
+}
 
 [node name="main" type="Node2D"]
 position = Vector2(8, 3)
@@ -25,17 +77,11 @@ bomb_scene = ExtResource("3_21xkr")
 [node name="map" type="StaticBody2D" parent="."]
 position = Vector2(464, 669)
 
-[node name="tree3" type="Sprite2D" parent="map"]
-texture_filter = 1
-position = Vector2(-448, -600)
-scale = Vector2(4.04278, 4.76)
-texture = ExtResource("4_d1ilt")
-
 [node name="tree2" type="Sprite2D" parent="map"]
 texture_filter = 1
-position = Vector2(272, -544)
-scale = Vector2(3.73622, 4.84708)
-texture = ExtResource("4_d1ilt")
+position = Vector2(-72, -392)
+scale = Vector2(1.0536, 0.922117)
+texture = ExtResource("4_6iyac")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map"]
 position = Vector2(-56, -112)
@@ -47,7 +93,7 @@ scale = Vector2(1.24808, 1.45225)
 texture = ExtResource("4_ynf5e")
 
 [node name="person" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(392, 389)
+position = Vector2(400, 333)
 
 [node name="Fruittimer" type="Timer" parent="."]
 
@@ -69,7 +115,7 @@ script = ExtResource("6_hptm8")
 texture_filter = 1
 position = Vector2(400, 296)
 scale = Vector2(1.0697, 1.38687)
-texture = ExtResource("7_hptm8")
+texture = ExtResource("8_6iyac")
 
 [node name="layer2" type="ParallaxLayer" parent="BG"]
 
@@ -123,6 +169,17 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_fonts/font = ExtResource("12_6iyac")
 theme_override_font_sizes/font_size = 13
 text = "Score 0"
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wsu2k")
+}
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(20.2162, 15.924)
+color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="Fruittimer" to="." method="_on_fruittimer_timeout"]
 [connection signal="timeout" from="Starttime" to="." method="_on_starttime_timeout"]

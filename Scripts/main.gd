@@ -2,8 +2,12 @@ extends Node2D
 
 @export var fruit_scene : PackedScene
 @export var bomb_scene : PackedScene
+@onready var fadein = $transition
 
 var posicoes_x = [300, 500]
+
+func _ready() -> void:
+	fadein.play("fade_in")
 
 func _on_starttime_timeout() -> void:
 	$Fruittimer.start()

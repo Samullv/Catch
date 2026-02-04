@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2mbdqjqstqxw"]
+[gd_scene load_steps=13 format=3 uid="uid://b2mbdqjqstqxw"]
 
 [ext_resource type="Script" uid="uid://xy5g3pt3ri6r" path="res://Scripts/bomb.gd" id="1_kdyat"]
 [ext_resource type="Texture2D" uid="uid://ys2lspiq1ct6" path="res://Sprites/pixilart-1770146031980.png" id="2_kdyat"]
@@ -42,10 +42,62 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="Animation" id="Animation_fdnlq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jkdf5"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6iyac"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wsu2k"]
+_data = {
+&"RESET": SubResource("Animation_fdnlq"),
+&"fade_in": SubResource("Animation_jkdf5"),
+&"fade_out": SubResource("Animation_6iyac")
+}
+
 [node name="bomb" type="RigidBody2D"]
 visibility_layer = 2
 scale = Vector2(1.03947, 1.23171)
-gravity_scale = 0.7
+gravity_scale = 0.548
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_kdyat")
@@ -61,5 +113,16 @@ sprite_frames = SubResource("SpriteFrames_gy8dh")
 animation = &"bomb"
 autoplay = "bomb"
 frame_progress = 0.913458
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wsu2k")
+}
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(20.2162, 15.924)
+color = Color(0, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://e6sxvl7hfcdd"]
+
+[ext_resource type="PackedScene" uid="uid://g58fccmgr12v" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://c1r3rr385hwc1" path="res://Scripts/main.gd" id="1_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dds4isdy6jo0v" path="res://Scenes/level.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://ru7eqnvjywv" path="res://Scenes/shark.tscn" id="3_8gbba"]
+[ext_resource type="AudioStream" uid="uid://drxwoaawy581m" path="res://Sound/suspense-tension-cinematic-331447 (1).mp3" id="5_21xkr"]
+[ext_resource type="AudioStream" uid="uid://eg6g1udu103f" path="res://Sound/ocean-waves-250310.mp3" id="6_21xkr"]
+
+[sub_resource type="Animation" id="Animation_21xkr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kry3j"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jjvhh"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6bp64"]
+_data = {
+&"RESET": SubResource("Animation_21xkr"),
+&"fade_in": SubResource("Animation_kry3j"),
+&"fade_out": SubResource("Animation_jjvhh")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jjvhh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6bp64")
+}
+speed_scale = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 578.0
+offset_bottom = 324.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+position = Vector2(317, 179)
+
+[node name="Level" parent="." instance=ExtResource("2_bo1nx")]
+
+[node name="shark" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(-124, 189)
+up_direction = Vector2(0, 1)
+
+[node name="Waves" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_21xkr")
+volume_db = 20.549
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_21xkr")
+volume_db = -7.141
+autoplay = true

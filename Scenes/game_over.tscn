@@ -1,0 +1,206 @@
+[gd_scene load_steps=24 format=3 uid="uid://boqcure05tqmt"]
+
+[ext_resource type="Script" uid="uid://nc6hdjjrhggp" path="res://Scripts/game_over.gd" id="1_rjluv"]
+[ext_resource type="Texture2D" uid="uid://0i53rx76bx1e" path="res://SpritesS/BOTTOMS_PIXEL/CONTINUE_BOTTOM_PIXEL_2.png" id="2_gjtdd"]
+[ext_resource type="Script" uid="uid://bwdplcdrbeu5b" path="res://Scenes/color_rect.gd" id="2_idf40"]
+[ext_resource type="Texture2D" uid="uid://beavod0e226m0" path="res://SpritesS/BOTTOMS_PIXEL/CONTINUE_BOTTOM_PIXEL_1.png" id="3_uylih"]
+[ext_resource type="Texture2D" uid="uid://bkbsnloevjbco" path="res://SpritesS/BOTTOMS_PIXEL/CONTINUE_BOTTOM_PIXEL_3.png" id="4_3817r"]
+[ext_resource type="Texture2D" uid="uid://xw3k6jgcbdb6" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_2.png" id="5_mitgx"]
+[ext_resource type="Texture2D" uid="uid://baw38dlqdef5d" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_1.png" id="6_gs2es"]
+[ext_resource type="Texture2D" uid="uid://b1nt263tdd8uv" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_3.png" id="7_asocn"]
+[ext_resource type="FontFile" uid="uid://ceooj8s6ssns1" path="res://font/Daydream DEMO.otf" id="8_i8bap"]
+[ext_resource type="Script" uid="uid://dup4cdjfl376d" path="res://Scripts/layer_1.gd" id="9_e3ik1"]
+[ext_resource type="Texture2D" uid="uid://b0mi3lk7d3yx7" path="res://Sprites/summer 3/1.png" id="10_4sv83"]
+[ext_resource type="Script" uid="uid://fk8enb5cgyw2" path="res://Scenes/layer_2.gd" id="11_4sv83"]
+[ext_resource type="Texture2D" uid="uid://bag8pa37hi6ku" path="res://Sprites/summer 3/2.png" id="11_os6t5"]
+[ext_resource type="Texture2D" uid="uid://dyr848eogpa6o" path="res://Sprites/summer 3/3.png" id="12_idf40"]
+[ext_resource type="Script" uid="uid://dq7gasdo54i86" path="res://Scenes/layer_3.gd" id="13_os6t5"]
+[ext_resource type="Texture2D" uid="uid://tlwl5lykhg4h" path="res://Sprites/2.png" id="13_w31wn"]
+[ext_resource type="Texture2D" uid="uid://rpp2gu1xa72a" path="res://Sprites/3.png" id="14_6ewkf"]
+[ext_resource type="Texture2D" uid="uid://sim20vek6yiu" path="res://Sprites/5.png" id="15_kbmbd"]
+[ext_resource type="Texture2D" uid="uid://dt6hfqfy8pupf" path="res://Sprites/4.png" id="16_4nxgh"]
+[ext_resource type="Texture2D" uid="uid://7q7uuf4md6wl" path="res://Sprites/cesta.png" id="19_os6t5"]
+
+[sub_resource type="Animation" id="Animation_3817r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uylih"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mitgx"]
+_data = {
+&"RESET": SubResource("Animation_3817r"),
+&"fade_out": SubResource("Animation_uylih")
+}
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_rjluv")
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mitgx")
+}
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0)
+script = ExtResource("2_idf40")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 577.0
+offset_bottom = 324.0
+scale = Vector2(1.36, 1.84)
+
+[node name="Continue" type="TextureButton" parent="Control"]
+modulate = Color(0.968627, 0.666667, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 170.588
+offset_top = 139.13
+offset_right = 426.588
+offset_bottom = 203.13
+scale = Vector2(0.851231, 0.866327)
+texture_normal = ExtResource("2_gjtdd")
+texture_pressed = ExtResource("3_uylih")
+texture_hover = ExtResource("4_3817r")
+
+[node name="Exit" type="TextureButton" parent="Control"]
+modulate = Color(0.968627, 0.666667, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -406.412
+offset_top = -110.957
+offset_right = -150.412
+offset_bottom = -46.9565
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.833426, 0.843533)
+texture_normal = ExtResource("5_mitgx")
+texture_pressed = ExtResource("6_gs2es")
+texture_hover = ExtResource("7_asocn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 160.0
+offset_right = 341.0
+offset_bottom = 186.0
+scale = Vector2(2.52, 2.36)
+theme_override_colors/font_color = Color(0.968627, 0.666667, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_i8bap")
+text = "Game over"
+
+[node name="BG" type="ParallaxBackground" parent="Label"]
+
+[node name="layer1" type="ParallaxLayer" parent="Label/BG"]
+auto_translate_mode = 1
+motion_mirroring = Vector2(800, 0)
+script = ExtResource("9_e3ik1")
+
+[node name="sprite1" type="Sprite2D" parent="Label/BG/layer1"]
+texture_filter = 1
+position = Vector2(416, 232)
+scale = Vector2(1.45898, 1.48478)
+texture = ExtResource("10_4sv83")
+
+[node name="layer2" type="ParallaxLayer" parent="Label/BG"]
+motion_mirroring = Vector2(800, 0)
+script = ExtResource("11_4sv83")
+
+[node name="sprite2" type="Sprite2D" parent="Label/BG/layer2"]
+texture_filter = 1
+position = Vector2(400, 272)
+scale = Vector2(1.43698, 1.68521)
+texture = ExtResource("11_os6t5")
+
+[node name="layer3" type="ParallaxLayer" parent="Label/BG"]
+position = Vector2(-8, 8)
+motion_mirroring = Vector2(800, 0)
+script = ExtResource("13_os6t5")
+
+[node name="sprite3" type="Sprite2D" parent="Label/BG/layer3"]
+texture_filter = 1
+position = Vector2(416, 280)
+scale = Vector2(1.45147, 1.84544)
+texture = ExtResource("12_idf40")
+
+[node name="layer4" type="ParallaxLayer" parent="Label/BG"]
+position = Vector2(-8, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="Label/BG/layer4"]
+position = Vector2(432, 296)
+scale = Vector2(1.0663, 1.28156)
+texture = ExtResource("13_w31wn")
+
+[node name="layer5" type="ParallaxLayer" parent="Label/BG"]
+position = Vector2(-8, 8)
+
+[node name="sprite3" type="Sprite2D" parent="Label/BG/layer5"]
+texture_filter = 1
+position = Vector2(424, 280)
+scale = Vector2(1.09495, 1.89396)
+texture = ExtResource("14_6ewkf")
+
+[node name="layer7" type="ParallaxLayer" parent="Label/BG"]
+position = Vector2(-8, 8)
+
+[node name="sprite3" type="Sprite2D" parent="Label/BG/layer7"]
+texture_filter = 1
+position = Vector2(424, 280)
+scale = Vector2(1.20603, 0.993241)
+texture = ExtResource("15_kbmbd")
+
+[node name="layer6" type="ParallaxLayer" parent="Label/BG"]
+position = Vector2(-8, 8)
+
+[node name="sprite3" type="Sprite2D" parent="Label/BG/layer6"]
+texture_filter = 1
+position = Vector2(440, 256)
+scale = Vector2(1.11864, 1.89314)
+texture = ExtResource("16_4nxgh")
+
+[node name="cesta" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(728, 456)
+scale = Vector2(0.67304, 0.571005)
+texture = ExtResource("19_os6t5")
+
+[connection signal="pressed" from="Control/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]

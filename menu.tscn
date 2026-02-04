@@ -1,0 +1,144 @@
+[gd_scene load_steps=17 format=3 uid="uid://dsxu4ucrkxljt"]
+
+[ext_resource type="Script" uid="uid://rmikon43633a" path="res://Scripts/menu.gd" id="1_1rerr"]
+[ext_resource type="Texture2D" uid="uid://cix22608pfa0g" path="res://SpritesS/22810266_2112.w026.n002.1167B.p1.1167.png" id="2_6swd7"]
+[ext_resource type="Texture2D" uid="uid://ilkjsvswao4t" path="res://SpritesS/22810266_2112.w026.n002.1167B.p1.1167-removebg-preview.png" id="3_7qvly"]
+[ext_resource type="Texture2D" uid="uid://dh86gln0hi054" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_2.png" id="4_rfqti"]
+[ext_resource type="Texture2D" uid="uid://cnjcglg5hoek2" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_3.png" id="5_g8i7c"]
+[ext_resource type="Texture2D" uid="uid://xemcmpml6ys2" path="res://SpritesS/BOTTOMS_PIXEL/PLAY_BOTTOM_PIXEL_1.png" id="6_23t3j"]
+[ext_resource type="Texture2D" uid="uid://xw3k6jgcbdb6" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_2.png" id="7_8ph6h"]
+[ext_resource type="Texture2D" uid="uid://b1nt263tdd8uv" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_3.png" id="8_5ti5v"]
+[ext_resource type="Texture2D" uid="uid://baw38dlqdef5d" path="res://SpritesS/BOTTOMS_PIXEL/EXIT_BOTTOM_PIXEL_1.png" id="9_7qvly"]
+[ext_resource type="FontFile" uid="uid://co7063i3i4a77" path="res://Fonts/Daydream DEMO.otf" id="10_7qvly"]
+[ext_resource type="AudioStream" uid="uid://brl2vtf5hy8nj" path="res://Sound/lofi-relax-347168.mp3" id="11_g8i7c"]
+[ext_resource type="AudioStream" uid="uid://eg6g1udu103f" path="res://Sound/ocean-waves-250310.mp3" id="12_23t3j"]
+
+[sub_resource type="Animation" id="Animation_rfqti"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7qvly"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8i7c"]
+_data = {
+&"RESET": SubResource("Animation_rfqti"),
+&"fade_out": SubResource("Animation_7qvly")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_rfqti"]
+font = ExtResource("10_7qvly")
+font_size = 38
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_1rerr")
+metadata/_edit_vertical_guides_ = [-145.0]
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g8i7c")
+}
+speed_scale = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+offset_right = 576.0
+offset_bottom = 325.0
+color = Color(0, 0, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 162)
+texture = ExtResource("2_6swd7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 162)
+scale = Vector2(1, 0.996154)
+texture = ExtResource("3_7qvly")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 575.0
+offset_bottom = 325.0
+size_flags_horizontal = 4
+
+[node name="start" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.211
+anchor_top = 0.357
+anchor_right = 0.211
+anchor_bottom = 0.357
+offset_left = -33.325
+offset_top = 23.975
+offset_right = 222.675
+offset_bottom = 87.975
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_rfqti")
+texture_pressed = ExtResource("5_g8i7c")
+texture_hover = ExtResource("6_23t3j")
+
+[node name="quit" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.214
+anchor_top = 0.666
+anchor_right = 0.214
+anchor_bottom = 0.666
+offset_left = -35.05
+offset_top = -3.45
+offset_right = 220.95
+offset_bottom = 63.55
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00732312
+texture_normal = ExtResource("7_8ph6h")
+texture_pressed = ExtResource("8_5ti5v")
+texture_hover = ExtResource("9_7qvly")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 432.0
+offset_bottom = 135.0
+rotation = -0.0289062
+text = "shark  bait !"
+label_settings = SubResource("LabelSettings_rfqti")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_g8i7c")
+autoplay = true
+
+[node name="Waves" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_23t3j")
+volume_db = -3.747
+autoplay = true
+
+[connection signal="pressed" from="Control/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/quit" to="." method="_on_quit_pressed"]
